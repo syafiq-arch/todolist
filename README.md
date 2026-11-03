@@ -1,58 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Project Duo Developer: Website To-Do List Pribadi
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> **Tugas Kolaborasi XI RPL SMK PESAT IT XPRO**  
+> **Tema**: *Kontrak dulu, ngoding bareng! (BE + Swagger × FE + Mock Data)*
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 👥 Identitas Pengembang
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Peran | Nama Siswa | Kelas | Tanggung Jawab Utama |
+|:---|:---|:---:|:---|
+| **Back-End (BE)** | *(Isi Nama Kamu)* | XI RPL | API Laravel + Sanctum, L5-Swagger, Migrasi DB, Kontrak API |
+| **Front-End (FE)** | *(Isi Nama Pasangan)* | XI RPL | Tampilan Blade, JavaScript Fetch, Integrasi Mock Data ke API |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📌 Deskripsi Proyek
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Aplikasi **To-Do List Pribadi** memungkinkan pengguna untuk mendaftar akun, masuk (login), melihat profil, mengelola tugas harian (tambah, lihat, ubah judul/tenggat, tandai selesai/belum selesai, dan hapus tugas). Sistem mengisolasi data secara ketat: **setiap akun hanya dapat melihat dan mengelola tugas miliknya sendiri**.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Pengembangan dilakukan secara paralel:
+1. **BE** merancang kontrak API awal, menulis dokumentasi Swagger, dan menyediakan API berbasis Laravel Sanctum.
+2. **FE** merancang antarmuka menggunakan Blade dan JavaScript dengan data Mock JSON sesuai kontrak sebelum API selesai.
+3. Kedua pihak mengintegrasikan sistem dan menguji alur secara menyeluruh.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 🌿 Struktur Percabangan (Git Branch)
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- `main` : Branch utama hasil integrasi akhir.
+- `feat/backend` : Branch kerja Back-End (API, Sanctum, Swagger, Database).
+- `feat/frontend` : Branch kerja Front-End (Blade Views, CSS/Tailwind, JavaScript, Mock Data).
 
+---
+
+## 🚀 Panduan Instalasi & Menjalankan Project
+
+### 1. Prasyarat
+- PHP >= 8.3 / 8.5
+- Composer
+- SQLite / MySQL
+- Web Browser
+
+### 2. Langkah Instalasi
+
+1. **Clone repositori**:
+   ```bash
+   git clone <URL_REPOSITORY>
+   cd kolaborasi
+   ```
+
+2. **Checkout ke branch kerja**:
+   ```bash
+   git checkout feat/backend
+   ```
+
+3. **Install Dependensi Composer**:
+   ```bash
+   composer install
+   ```
+
+4. **Konfigurasi Environment**:
+   Salin file `.env.example` menjadi `.env` lalu generate application key:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+5. **Jalankan Migrasi Database**:
+   ```bash
+   touch database/database.sqlite
+   php artisan migrate
+   ```
+
+6. **Generate Dokumentasi Swagger (OpenAPI)**:
+   ```bash
+   php artisan l5-swagger:generate
+   ```
+
+7. **Jalankan Server Lokal**:
+   ```bash
+   php artisan serve
+   ```
+   Aplikasi dapat diakses melalui browser di: `http://localhost:8000`
+
+---
+
+## 📖 Dokumentasi API & Swagger
+
+Dokumentasi API interaktif dapat dibuka langsung melalui web browser:
+🔗 **[http://localhost:8000/api/documentation](http://localhost:8000/api/documentation)**
+
+Dokumen spesifikasi untuk Front-End:
+- **Kontrak API Lengkap**: [docs/kontrak-api.md](docs/kontrak-api.md)
+- **Spesifikasi OpenAPI JSON**: [docs/openapi.json](docs/openapi.json)
+
+---
+
+## 🧪 Pengujian Otomatis (Automated Tests)
+
+Untuk memvalidasi bahwa seluruh endpoint autentikasi, isolasi data antar user, dan fitur to-do list berjalan tanpa cacat:
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+php artisan test
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 💡 Refleksi Integrasi (Sesuai LKPD Tahap 04)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 1. Apa perbedaan mock dan API nyata?
+- **Mock Data**: Merupakan tiruan data statis (biasanya berupa file JSON atau array JavaScript lokal) yang digunakan oleh Front-End agar pengembangan tampilan (UI/UX), tata letak form, dan penanganan status visual (loading, data kosong, status selesai) dapat dikerjakan secara langsung tanpa harus menunggu server Back-End selesai dibuat. Mock tidak menyimpan data ke database dan tidak memiliki sistem autentikasi nyata.
+- **API Nyata**: Merupakan antarmuka pemrograman sebenarnya di sisi Back-End yang memproses logika bisnis nyata, memvalidasi format input dari user, melakukan hashing password, memverifikasi token Sanctum, serta menyimpan dan memperbarui data secara permanen di database. API nyata juga menjamin keamanan seperti **isolasi data** (User A tidak bisa melihat atau mengedit tugas User B).
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 2. Perbedaan kontrak apa yang kalian temukan, dan bagaimana menyelesaikannya?
+- **Temuan**: Pada tahap awal, terdapat perbedaan ekspektasi field status tugas antara format boolean (`is_done: true/false`) dan format string (`status: 'todo' / 'done'`), serta penamaan field tanggal (`deadline` vs `due_date`). Selain itu, format response error validasi perlu disepakati agar FE dapat menampilkan pesan error di bawah input field yang sesuai.
+- **Penyelesaian**: Kedua pihak mengacu pada dokumen `docs/kontrak-api.md` yang disepakati sejak awal. Kami menetapkan field `status` menggunakan enum string `['todo', 'done']` dan tanggal menggunakan field `deadline` dengan format `YYYY-MM-DD`. Semua respon dibungkus dalam format standar `{ "message": "...", "data": ... }` sehingga FE dapat membuat fungsi fetch terpusat tanpa mengalami error parsing data.
